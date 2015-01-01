@@ -4,6 +4,10 @@ out vec4 pixelColor;
 in vec2 coord;
  
 uniform sampler1D Pallet;
+
+uniform float CrealOf;
+uniform float CimagOf;
+uniform int MaxIterations;
  
 void main()
 {
@@ -12,8 +16,6 @@ void main()
  
     float   Creal = real;  
     float   Cimag = imag;  
- 
-    int MaxIterations = 100;
  
     float r2 = 0.0;
  

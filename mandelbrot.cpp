@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-    GLFWwindow* window = glfwCreateWindow(800, 800, "LearnOpenGL", nullptr, nullptr); // Windowed
+    GLFWwindow* window = glfwCreateWindow(1000, 1000, "LearnOpenGL", nullptr, nullptr); // Windowed
     glfwMakeContextCurrent(window);
 
     if(window == NULL) //Check if Window is created
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
     glewInit();
 
     // Define the viewport dimensions
-    glViewport(0, 0, 800, 800);
+    glViewport(0, 0, 1000, 1000);
 
     // Build Shader
     Shader shader("Shaders/vertex.vs", "Shaders/fragment.frag");
@@ -120,11 +120,10 @@ int main(int argc, char *argv[])
 	glBindTexture(GL_TEXTURE_1D, 0);
 
 
-	//glUniform1i(glGetUniformLocation(shader.Program, "MaxIterations"), 1000);
     // Game loop
     while(!glfwWindowShouldClose(window))
     {
-    	clock_t start = clock(); // Start timer __GPU__
+        clock_t start = clock(); // Start timer __GPU__
         // Check and call events
         glfwPollEvents();
 
@@ -133,8 +132,9 @@ int main(int argc, char *argv[])
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-		glUniform1f(glGetUniformLocation(shader.Program, "CrealOf"), zoomY);
-		glUniform1f(glGetUniformLocation(shader.Program, "CimagOf"), zoomX);
+        glUniform1f(glGetUniformLocation(shader.Program, "CrealOf"), zoomY);
+        glUniform1f(glGetUniformLocation(shader.Program, "CimagOf"), zoomX);
+	    glUniform1i(glGetUniformLocation(shader.Program, "MaxIterations"), 1000);
 
         // Drawing
         shader.Use();
