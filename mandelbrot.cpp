@@ -6,7 +6,7 @@
 #include <GLFW/glfw3.h>
 
 // GL includes
-#include "Shader.h"
+#include "Libraries/Shader.h"
 
 // GLM Mathemtics
 #include <glm/glm.hpp>
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
     glViewport(0, 0, 800, 800);
 
     // Build Shader
-    Shader shader("vertex.vs", "fragment.frag");
+    Shader shader("Shaders/vertex.vs", "Shaders/fragment.frag");
 
     //GLfloat vertices[] = {
     //  // First triangle
@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
 	glBindTexture(GL_TEXTURE_1D, texture); 
 	glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     int width, height;
-	unsigned char* image = SOIL_load_image("1817.png", 
+	unsigned char* image = SOIL_load_image("Pallets/1817.png", 
 	  &width, &height, 0, SOIL_LOAD_RGB);  
 	glTexImage1D(GL_TEXTURE_1D, 0, GL_RGB, width, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);   
@@ -121,9 +121,6 @@ int main(int argc, char *argv[])
 
 
 	//glUniform1i(glGetUniformLocation(shader.Program, "MaxIterations"), 1000);
-    std::cout << "1111";
-    std::cout << "\r";
-    std::cout << "2222";
     // Game loop
     while(!glfwWindowShouldClose(window))
     {
@@ -152,11 +149,9 @@ int main(int argc, char *argv[])
 
         // Swap the buffers
         glfwSwapBuffers(window);
-        cout << '\r';
         if(fps || compare)
-            cout << "GPU/OpenGL Took " << clock() - start << "ms"; // Stop timer __GPU__
+            cout << "GPU/OpenGL Took " << clock() - start << "ms\n"; // Stop timer __GPU__
     }
-    cout << endl;
     
     glfwTerminate();
 
