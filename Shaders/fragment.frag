@@ -5,14 +5,15 @@ in vec2 coord;
  
 uniform sampler1D Pallet;
 
-uniform float CrealOf;
-uniform float CimagOf;
+uniform float Zoom;
+uniform vec2 Move;
+
 uniform int MaxIterations;
  
 void main()
 {
-    float   real  = coord.x;
-    float   imag  = coord.y;
+    float   real  = (coord.x + Move.x) * Zoom;
+    float   imag  = (coord.y  + Move.y) * Zoom;
  
     float   Creal = real;  
     float   Cimag = imag;  

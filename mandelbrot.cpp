@@ -18,8 +18,9 @@
 #include <time.h>
 #include <string.h>
 
-float zoomY = 0.0f;
-float zoomX = 0.0f;
+float zoomXY = 1.0f;
+float MoveX = 0.0f;
+float MoveY = 0.0f;
 
 // Function prototypes
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -132,8 +133,8 @@ int main(int argc, char *argv[])
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glUniform1f(glGetUniformLocation(shader.Program, "CrealOf"), zoomY);
-        glUniform1f(glGetUniformLocation(shader.Program, "CimagOf"), zoomX);
+        glUniform1f(glGetUniformLocation(shader.Program, "Zoom"), zoomXY);
+        glUniform2f(glGetUniformLocation(shader.Program, "Move"), MoveX,MoveY);
 	    glUniform1i(glGetUniformLocation(shader.Program, "MaxIterations"), 1000);
 
         // Drawing
@@ -244,11 +245,18 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     //cout << key << endl;
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
+    else if(key == GLFW_KEY_W && action == GLFW_PRESS)
+        MoveY += 0.1f;
+    else if(key == GLFW_KEY_S && action == GLFW_PRESS)
+        MoveY -= 0.1f;
+    else if(key == GLFW_KEY_A && action == GLFW_PRESS)
+        MoveX -= 0.1f;
+    else if(key == GLFW_KEY_D && action == GLFW_PRESS)
+        MoveX += 0.1f;
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
 	cout << "ScrollX[" << xoffset << "] ScrollY[" << yoffset << "]" << endl;
-	zoomX += yoffset / 10.0f;
-	zoomY += xoffset / 10.0f;
+	zoomXY += yoffset / 10.0f;
 }
