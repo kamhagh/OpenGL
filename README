@@ -1,4 +1,4 @@
 Mandelbrot !
 
-use -C for comparing CPU and GPU
-use -F for GPU render time!!
+Use -C for GPU and CPU comparison 
+Use -F for GPU render time!!
